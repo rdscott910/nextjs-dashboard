@@ -12,14 +12,12 @@ import { formatCurrency } from './utils';
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
-
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch completed after 3 seconds.');
+    console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -30,6 +28,9 @@ export async function fetchRevenue() {
 
 export async function fetchLatestInvoices() {
   try {
+    // Artificially delay a response for demo purposes.
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -50,6 +51,9 @@ export async function fetchLatestInvoices() {
 
 export async function fetchCardData() {
   try {
+    // Artificially delay a response for demo purposes.
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
     // how to initialize multiple queries in parallel with JS.
